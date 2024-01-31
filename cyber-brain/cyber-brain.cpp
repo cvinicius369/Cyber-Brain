@@ -56,9 +56,11 @@ public:
 //--------------------------------------------------| Maquinas criadoras
 void ApresentaDadosAtomo(AtomoGeral* atomo) {
     cout << "Particulas criadas" << endl;
+    Estilo();
     printf("Numero de Protons: %d \n", atomo->getCargaP());         // Apresentando proton
     printf("Numero de Neutrons: %d \n", atomo->getMassa());         // Apresentando neutron
     printf("Numero de Eletrons: %d \n", atomo->getCargaN());        // Apresentando eletron   
+    Estilo();
 }
 void ApresentaDadosElemento(Elemento elemento) {                              // Funcao que apresenta os dados dos
     cout << "Numero de Protons: " << elemento.getProtons() << endl;           // Apresentando protons
@@ -116,9 +118,11 @@ void CriaAtomo(AtomoGeral* atomo) {
         repeticoes = repeticoes + 1;                                // Controlando o numero de repetições
     }
     if (atomo->getCargaP() > 0) {
+        Estilo();
         cout << "Atomo criado com sucesso!" << endl;                // mensagem printada ao criar o atomo automaticamente
     }
     else {
+        Estilo();
         cout << "Atomo não criado [Precisa de Protons]" << endl;    // quando não ha nenhum proton sera impressa essa mensagem
     }
     if (atomo->getCargaP() == 1) {                                                   // auto definicao dos atomos onde dependendo das suas particulas um elemento eh criado
@@ -250,6 +254,7 @@ int main(int argc, char** argv) {
     Estilo();
     if (decision == 1) {                                                          // iniciando sistema quantico
         cout << "////////////////////////////////// Acessando Sistema Quantico ///////////////////////////////" << endl; Estilo();
+        cout << "Criando particula para teste. . . " << endl;
         AtomoGeral* atomo = new AtomoGeral();                                     // criando atomo generico usando ponteiros
         atomo->getNucleo();                                                       // obtendo informacoes do nucleo
         CriaAtomo(atomo); Estilo();                                               // criando atomo automaticamente gerando 3 particulas aleatorias
