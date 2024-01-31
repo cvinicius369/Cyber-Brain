@@ -1,39 +1,44 @@
 //Prototipo do projeto CYBER-BRAIN
-#include <iostream>                     // biblioteca padrao do sistema do c++
-#include <string>                       // biblioteca que permite o uso de strings
-#include <random>                       // biblioteca para ajudar a criar numeros randomicos/aleatorios
-#include <vector>                       // biblioteca que permite o uso de vetores e algebra linear
-#include <ctime>                        // biblioteca que permite manipular o tempo
-#include <cmath>                        // biblioteca que permite fazer equacoes matematicas complexas
+#include <iostream>          // biblioteca padrao do sistema do c++
+#include <string>            // biblioteca que permite o uso de strings
+#include <random>            // biblioteca para ajudar a criar numeros randomicos/aleatorios
+#include <vector>            // biblioteca que permite o uso de vetores e algebra linear
+#include <ctime>             // biblioteca que permite manipular o tempo
+#include <cmath>             // biblioteca que permite fazer equacoes matematicas complexas
 using namespace std;
 
 //-----------------------------------------------Elementos
-void Estilo() {                                                                                 // funcao para ajudar a entender o software
+void Estilo() {                                                           // funcao para ajudar a entender o software
     cout << "----------------------------------------------------------------------------------------------" << endl;
 }
 /*
 --->> Escala Quantica
 */
 //-----------------------------------------------Tabela Periodica
+string elementos[] = {
+        "Hidrogenio", "Deuterio", "Tritio",                              // Hidrogenio e seus isotopos
+        "Helio", 
+        "Litio"
+    };
 //------------------------------------Genericos
 class AtomoGeral {
 private:
-    int nucleo, massa = 0, carga_positiva = 0, carga_negativa = 0, elemento = 0;                // Definidos os atributos do atomo
+    int nucleo, massa = 0, carga_positiva = 0, carga_negativa = 0, elemento = 0;              // Definidos os atributos do atomo
 public:
-    int getNucleo() { return nucleo; }                                                          // Obtendo dados do nucleo
-    int getMassa() { return massa; }                                                            // Obtendo a massa do atomo
-    int getCargaP() { return carga_positiva; }                                                  // Obtendo a carga positiva (proton)
-    int getCargaN() { return carga_negativa; }                                                  // Obtendo a carga negativa (eletron)
-    int getElemento() { return elemento; }                                                      // Obtendo o elemento
-    int AlteraNucleo(int dado) { this->nucleo = dado; return this->nucleo; }                    // Alterando valor do nucleo
-    int AlteraMassa(int dado) { this->massa = dado; return this->massa; }                       // Alterando valor da massa
-    int AlteraCargaP(int dado) { this->carga_positiva = dado; return this->carga_positiva; }    // Alterando valor da carga positiva
-    int AlteraCargaN(int dado) { this->carga_negativa = dado; return this->carga_negativa; }    // Alterando valor da carga negativa
-    int AlteraElemento(int dado) { this->elemento = dado; return this->elemento; }              // Alterando o elemento
+    int getNucleo() { return nucleo; }                                                        // Obtendo dados do nucleo
+    int getMassa() { return massa; }                                                          // Obtendo a massa do atomo
+    int getCargaP() { return carga_positiva; }                                                // Obtendo a carga positiva (proton)
+    int getCargaN() { return carga_negativa; }                                                // Obtendo a carga negativa (eletron)
+    int getElemento() { return elemento; }                                                    // Obtendo o elemento
+    int AlteraNucleo(int dado) { this->nucleo = dado; return this->nucleo; }                  // Alterando valor do nucleo
+    int AlteraMassa(int dado) { this->massa = dado; return this->massa; }                     // Alterando valor da massa
+    int AlteraCargaP(int dado) { this->carga_positiva = dado; return this->carga_positiva; }  // Alterando valor da carga positiva
+    int AlteraCargaN(int dado) { this->carga_negativa = dado; return this->carga_negativa; }  // Alterando valor da carga negativa
+    int AlteraElemento(int dado) { this->elemento = dado; return this->elemento; }            // Alterando o elemento
 };
 class Elemento {
 private:
-    int n_eletrons = 0, n_protons = 0, n_neutrons = 0, massa_total = 0;                                     // Definidos os atributos do elemento
+    int n_eletrons = 0, n_protons = 0, n_neutrons = 0, massa_total = 0;                     // Definidos os atributos do elemento
     string name;
 public:
     // Funcoes para obter valores
@@ -61,7 +66,7 @@ void ApresentaDadosElemento(Elemento elemento) {                              //
     cout << "Numero de Eletrons: " << elemento.getEletrons() << endl;         // Apresentando eletrons
     cout << "Massa total do nucleo: " << elemento.getMassa() << endl;         // Apresentando massa total do nucleo 
 }
-void CiraElemento() {                                                                        // Funcao que cria elementos de acordo com os desejos do usuario
+void CiraElemento() {                                          // Funcao que cria elementos de acordo com os desejos do usuario
     int element;
     cout << "Escolha o elemento:" << endl;
     cout << "[1] Hidrogenio\n[2] Deuterio\n[3] Tritio\n[4] Helio\n[5] Litio\nR= ";
@@ -161,11 +166,15 @@ void CriaAtomo(AtomoGeral* atomo) {
 }
 
 //-------------------------------------------------------------------| Nivel Molecular
-class MoleculaGenerica {                                                   // classe molecula onde contem os atributos de uma molecula
-private:
-    int qtd_elementos;
-public:
-    int getElementos() { return qtd_elementos; }
+class Molecula {                                                   // classe molecula onde contem os atributos de uma molecula
+    private:
+        int qtd_elementos;
+    public:
+        int getElementos() { return qtd_elementos; }
+    };
+
+class GeraMolecul{
+
 };
 
 //-------------------------------------------------------------------| Neuronio
