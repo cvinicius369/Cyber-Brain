@@ -4,7 +4,7 @@
     project: Inteligencia Artificial com base em simulação de escalas quanticas, moleculares e celulares.
 ---
 ## Resumo
-    O projento tem como objetivo criar uma inteligencia artificial o mais identica ao cerebro humano possivel, isso vai desde escalas quanticas (manipulação de particulas e atomos) até escalas celulares (neurorios e redes neurais).
+    O projeto tem como objetivo criar uma inteligencia artificial o mais identica ao cerebro humano possivel, isso vai desde escalas quanticas (manipulação de particulas e atomos) até escalas celulares (neurorios e redes neurais).
 #### Escala Quantica
     Começa com a criação de particulas como Neutron, Proton e Eletron, as mesmas começam a ter comportamentos semelhantes as reais e assim formam-se os cyber-atomos (atomos criados virtualmente).
 #### Escala Molecular
