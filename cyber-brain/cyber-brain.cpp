@@ -16,36 +16,36 @@ void Estilo() {                                                           // fun
 */
 //------------------------------------Genericos
 class AtomoGeral {
-private:
-    int nucleo, massa = 0, carga_positiva = 0, carga_negativa = 0, elemento = 0;              // Definidos os atributos do atomo
-public:
-    int getNucleo() { return nucleo; }                                                        // Obtendo dados do nucleo
-    int getMassa() { return massa; }                                                          // Obtendo a massa do atomo
-    int getCargaP() { return carga_positiva; }                                                // Obtendo a carga positiva (proton)
-    int getCargaN() { return carga_negativa; }                                                // Obtendo a carga negativa (eletron)
-    int getElemento() { return elemento; }                                                    // Obtendo o elemento
-    int AlteraNucleo(int dado) { this->nucleo = dado; return this->nucleo; }                  // Alterando valor do nucleo
-    int AlteraMassa(int dado) { this->massa = dado; return this->massa; }                     // Alterando valor da massa
-    int AlteraCargaP(int dado) { this->carga_positiva = dado; return this->carga_positiva; }  // Alterando valor da carga positiva
-    int AlteraCargaN(int dado) { this->carga_negativa = dado; return this->carga_negativa; }  // Alterando valor da carga negativa
-    int AlteraElemento(int dado) { this->elemento = dado; return this->elemento; }            // Alterando o elemento
+    private:
+        int nucleo, massa = 0, carga_positiva = 0, carga_negativa = 0, elemento = 0;              // Definidos os atributos do atomo
+    public:
+        int getNucleo() { return nucleo; }                                                        // Obtendo dados do nucleo
+        int getMassa() { return massa; }                                                          // Obtendo a massa do atomo
+        int getCargaP() { return carga_positiva; }                                                // Obtendo a carga positiva (proton)
+        int getCargaN() { return carga_negativa; }                                                // Obtendo a carga negativa (eletron)
+        int getElemento() { return elemento; }                                                    // Obtendo o elemento
+        int AlteraNucleo(int dado) { this->nucleo = dado; return this->nucleo; }                  // Alterando valor do nucleo
+        int AlteraMassa(int dado) { this->massa = dado; return this->massa; }                     // Alterando valor da massa
+        int AlteraCargaP(int dado) { this->carga_positiva = dado; return this->carga_positiva; }  // Alterando valor da carga positiva
+        int AlteraCargaN(int dado) { this->carga_negativa = dado; return this->carga_negativa; }  // Alterando valor da carga negativa
+        int AlteraElemento(int dado) { this->elemento = dado; return this->elemento; }            // Alterando o elemento
 };
 class Elemento {
-private:
-    int n_eletrons = 0, n_protons = 0, n_neutrons = 0, massa_total = 0;                     // Definidos os atributos do elemento
-    string name;
-public:
-    // Funcoes para obter valores
-    int getEletrons() { return n_eletrons; }                                                // Obtendo os eletrons do elemento
-    int getProtons() { return n_protons; }                                                  // Obtendo os protons do elemento
-    int getNeutrons() { return n_neutrons; }                                                // Obtendo os neutrons do elemento
-    int getMassa() { return massa_total; }                                                  // Obtendo a massa total do elemento
-    string getNameElemento() { return name; }                                               // Obtendo o nome do elemento
-    void AlteraName(const string& novo) { name = novo; }                                    // Alterando o nome do elemento
-    int AlteraMassaTotal(int dado) { this->massa_total = dado; return this->massa_total; }  // Alterando a massa total
-    int AlteraProton(int dado) { this->n_protons = dado; return this->n_protons; }          // Alterando a quantidade de protons
-    int AlteraEletron(int dado) { this->n_eletrons = dado; return this->n_eletrons; }       // Alterando a quantidade de eletrons
-    int AlteraNeutron(int dado) { this->n_neutrons = dado; return this->n_neutrons; }       // Alterando a quantidade de neutrons
+    private:
+        int n_eletrons = 0, n_protons = 0, n_neutrons = 0, massa_total = 0;                     // Definidos os atributos do elemento
+        string name;
+    public:
+        // Funcoes para obter valores
+        int getEletrons() { return n_eletrons; }                                                // Obtendo os eletrons do elemento
+        int getProtons() { return n_protons; }                                                  // Obtendo os protons do elemento
+        int getNeutrons() { return n_neutrons; }                                                // Obtendo os neutrons do elemento
+        int getMassa() { return massa_total; }                                                  // Obtendo a massa total do elemento
+        string getNameElemento() { return name; }                                               // Obtendo o nome do elemento
+        void AlteraName(const string& novo) { name = novo; }                                    // Alterando o nome do elemento
+        int AlteraMassaTotal(int dado) { this->massa_total = dado; return this->massa_total; }  // Alterando a massa total
+        int AlteraProton(int dado) { this->n_protons = dado; return this->n_protons; }          // Alterando a quantidade de protons
+        int AlteraEletron(int dado) { this->n_eletrons = dado; return this->n_eletrons; }       // Alterando a quantidade de eletrons
+        int AlteraNeutron(int dado) { this->n_neutrons = dado; return this->n_neutrons; }       // Alterando a quantidade de neutrons
 };
 //--------------------------------------------------| Maquinas criadoras
 void ApresentaDadosAtomo(AtomoGeral* atomo) {
@@ -166,33 +166,36 @@ void CriaAtomo(AtomoGeral* atomo) {
 //-------------------------------------------------------------------| Nivel Molecular
 class Molecula {                                 // classe molecula onde contem os atributos de uma molecula
     private:
-        int qtd_elementos = 0;                   // quantidade de elementos que a molecula contem
+        int qtd_elementos = 0;                       // quantidade de elementos que a molecula contem
         string elemento[30];
     public:
-        int DefineQtdElementos(int quantidade){ this->qtd_elementos = quantidade; return this->qtd_elementos; }
-        void  DefineElementos(){
-            for (int i; i < qtd_elementos; i++){
+        int DefineQtdElementos(int quantidade) { this->qtd_elementos = quantidade; return this->qtd_elementos; }
+        void  DefineElementos() {
+            for (int i = 0; i < qtd_elementos; i++) {
                 string novoelemento;
                 cout << "Defina o elemento " << i << ": ";
                 cin >> novoelemento;
                 this->elemento[i] = novoelemento;
                 cout << "Elemento: " << elemento[i] << " adicionado." << endl;
             }
-        }
+    }
 };
-class GeraMolecula{
+class GeraMolecula {
     public:
-        void MoleculasCriadas(){
+        void MoleculasCriadas() {
             string resposta;
             cout << "Digite a molecula que deseja criar: ";
             cin >> resposta;
-            if ((resposta == "Helonio") || (resposta == "helonio")){
+            if ((resposta == "Helonio") || (resposta == "helonio")) {
                 Molecula helonio;
                 helonio.DefineQtdElementos(2);
                 helonio.DefineElementos();
                 //bloco a ser criado
                 cout << "Molecula Criada com sucesso!" << endl;
-            } 
+                Estilo();
+                cout << "Sistema Quantico Nivel Molecular: Funcional" << endl;
+                Estilo();
+            }
         }
 };
 
@@ -202,14 +205,14 @@ class Neuronio {
 
     public:
         Neuronio(double peso, double bias) : peso(peso), bias(bias) {}        // construtor permitindo o manuseio das variaveis
-                                                                              // Função linear
+        // Função linear
         double feedforward(double entrada) { return entrada * peso + bias; }
 
         void treinar(double entrada, double alvo) {
             double saida = feedforward(entrada);
             double erro = alvo - saida;                                       // Calcula o erro
 
-                                                                              // Ajusta o peso e o bias usando o gradiente descendente
+            // Ajusta o peso e o bias usando o gradiente descendente
             peso += 0.1 * erro * entrada;                                     // os digitos em double sao as taxas de aprendizado
             bias += 0.1 * erro;
 
@@ -252,7 +255,7 @@ class RedeNeural {
 
 int main(int argc, char** argv) {
     int decision, decision_quantic;
-    menu: 
+    menu:
     cout << "[1] Sistema Quantico\n[2] Rede Neural\n[3] Sistema Molecular\n[4] Sair\n-> ";
     cin >> decision;
     Estilo();
@@ -267,10 +270,12 @@ int main(int argc, char** argv) {
         cin >> decision_quantic;
         if (decision_quantic == 1) {
             CiraElemento();                                                       // funcao para criar novo elemento com base no atomo criado por particulas
-        } else if (decision_quantic == 2){
+        }
+        else if (decision_quantic == 2) {
             cout << "Saindo . . . " << endl;
             goto menu;
-        } else { cout << "Informacao Invalida!" << endl; }
+        }
+        else { cout << "Informacao Invalida!" << endl; }
     }
     else if (decision == 2) {
         int opcoes;
@@ -283,7 +288,7 @@ int main(int argc, char** argv) {
             while (cont == true) {
                 double w1, b1, w2, b2, ws, bs;
                 int decisao;
-                                                                                  
+
                 cout << "Informe o valor de entrada para Neuronio-1: "; cin >> w1;      // definindo peso do neuronio 1
                 cout << "Agora o valor alvo para Neuronio-1: ";         cin >> b1;      // definindo bias do neuronio 1
                 cout << "Agora valor de entrada do Neuronio-2: ";       cin >> w2;      // peso do neuronio 2
@@ -300,12 +305,13 @@ int main(int argc, char** argv) {
                 if (decisao == 2) { cont = false; }                                                  // condicional que define a continuidade do codigo
                 Estilo();
             }
-        } else if (opcoes == 2) {
-                                                                                             // Treina a rede neural
+        }
+        else if (opcoes == 2) {
+            // Treina a rede neural
             double w1 = 0, b1 = 0, w2 = 0, b2 = 0, ws = 0, bs = 0;
 
             RedeNeural redeNeural(w1, b1, w2, b2, ws, bs);
-                                                                                             // Dados de treinamento
+            // Dados de treinamento
             vector<double> entradas = { 1, 2, 3, 4, 5 };
             vector<double> alvos = { 1, 4, 9, 16, 25 };
 
@@ -314,12 +320,16 @@ int main(int argc, char** argv) {
                 redeNeural.treinar(entradas, alvos);
             }
         }
-    } else if (decision == 3) {
+    }
+    else if (decision == 3) {
+        cout << "///////////////////////////////// Acessando Sistema Molecular ///////////////////////////////" << endl; Estilo();
         GeraMolecula gerador;
         gerador.MoleculasCriadas();
-    } else if (decision == 4) {
+    }
+    else if (decision == 4) {
         cout << "Até mais!" << endl;
-    } else { cout << "Acao invalida!" << endl; }
+    }
+    else { cout << "Acao invalida!" << endl; }
     system("pause");
     return 0;
 }
