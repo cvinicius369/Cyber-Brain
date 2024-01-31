@@ -166,15 +166,27 @@ void CriaAtomo(AtomoGeral* atomo) {
 }
 
 //-------------------------------------------------------------------| Nivel Molecular
-class Molecula {                                                   // classe molecula onde contem os atributos de uma molecula
+class Molecula {                                 // classe molecula onde contem os atributos de uma molecula
     private:
-        int qtd_elementos;
+        int qtd_elementos;                       // quantidade de elementos que a molecula contem 
+        string compostos[];                      // array contendo todos os elementos da molecula
     public:
-        int getElementos() { return qtd_elementos; }
-    };
-
-class GeraMolecul{
-
+        string getCompostos(){                   // metodo para obter todos os elementos
+            for(int i = 0; i < 12; i++) {        // funcao for para que imprima os 12 primeiros indices
+                cout << "Elemento " << i+1 << ": " << compostos[i] << endl;
+                return compostos[i];             // retornando o valor do indice com o elemento relacionado
+            }
+        }
+        string AlteraCompostos(string composicao[]){  // metodo para determinar a composicao
+            for(int i = 0; i < 12; i++) {             // funcao for para alterar a composicao com todos os elementos
+                cout << "Elemento " << i+1 << ": " << compostos[i] << endl;
+                this->compostos[i] = composicao[i];   // realizando alteracao 
+                return this->compostos[i];            // retornando valor
+            }
+        }
+};
+class GeraMolecula{
+        
 };
 
 //-------------------------------------------------------------------| Neuronio
