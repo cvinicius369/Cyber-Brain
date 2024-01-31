@@ -1,0 +1,3 @@
+﻿  cyber-brain.cpp
+C:\Users\vinic\OneDrive\Área de Trabalho\VISUAL STUDIO\PROJETO 3 - TESTES DE IAS\T - 02.1\cyber-brain\cyber-brain.cpp(96,15): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
+  cyber-brain.vcxproj -> C:\Users\vinic\OneDrive\Área de Trabalho\VISUAL STUDIO\PROJETO 3 - TESTES DE IAS\T - 02.1\cyber-brain\x64\Debug\cyber-brain.exe
