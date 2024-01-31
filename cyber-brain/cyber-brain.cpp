@@ -14,12 +14,6 @@ void Estilo() {                                                           // fun
 /*
 --->> Escala Quantica
 */
-//-----------------------------------------------Tabela Periodica
-string elementos[] = {
-        "Hidrogenio", "Deuterio", "Tritio",                              // Hidrogenio e seus isotopos
-        "Helio", 
-        "Litio"
-    };
 //------------------------------------Genericos
 class AtomoGeral {
 private:
@@ -167,30 +161,39 @@ void CriaAtomo(AtomoGeral* atomo) {
         atomo->AlteraElemento(atomo->getElemento() + 3); ApresentaDadosAtomo(atomo); delete atomo;
         cout << "Atomo: Litio" << endl;
     }
-}
+};
 
 //-------------------------------------------------------------------| Nivel Molecular
 class Molecula {                                 // classe molecula onde contem os atributos de uma molecula
     private:
-        int qtd_elementos;                       // quantidade de elementos que a molecula contem 
-        string compostos[];                      // array contendo todos os elementos da molecula
+        int qtd_elementos = 0;                   // quantidade de elementos que a molecula contem
+        string elemento[30];
     public:
-        string getCompostos(){                   // metodo para obter todos os elementos
-            for(int i = 0; i < 12; i++) {        // funcao for para que imprima os 12 primeiros indices
-                cout << "Elemento " << i+1 << ": " << compostos[i] << endl;
-                return compostos[i];             // retornando o valor do indice com o elemento relacionado
-            }
-        }
-        string AlteraCompostos(string composicao[]){  // metodo para determinar a composicao
-            for(int i = 0; i < 12; i++) {             // funcao for para alterar a composicao com todos os elementos
-                cout << "Elemento " << i+1 << ": " << compostos[i] << endl;
-                this->compostos[i] = composicao[i];   // realizando alteracao 
-                return this->compostos[i];            // retornando valor
+        int DefineQtdElementos(int quantidade){ this->qtd_elementos = quantidade; return this->qtd_elementos; }
+        void  DefineElementos(){
+            for (int i; i < qtd_elementos; i++){
+                string novoelemento;
+                cout << "Defina o elemento " << i << ": ";
+                cin >> novoelemento;
+                this->elemento[i] = novoelemento;
+                cout << "Elemento: " << elemento[i] << " adicionado." << endl;
             }
         }
 };
 class GeraMolecula{
-        
+    public:
+        void MoleculasCriadas(){
+            string resposta;
+            cout << "Digite a molecula que deseja criar: ";
+            cin >> resposta;
+            if ((resposta == "Helonio") || (resposta == "helonio")){
+                Molecula helonio;
+                helonio.DefineQtdElementos(2);
+                helonio.DefineElementos();
+                //bloco a ser criado
+                cout << "Molecula Criada com sucesso!" << endl;
+            } 
+        }
 };
 
 //-------------------------------------------------------------------| Neuronio
@@ -250,7 +253,7 @@ class RedeNeural {
 int main(int argc, char** argv) {
     int decision, decision_quantic;
     menu: 
-    cout << "[1] Sistema Quantico\n[2] Rede Neural\n[3] Sair\n-> ";
+    cout << "[1] Sistema Quantico\n[2] Rede Neural\n[3] Sistema Molecular\n[4] Sair\n-> ";
     cin >> decision;
     Estilo();
     if (decision == 1) {                                                          // iniciando sistema quantico
@@ -311,7 +314,10 @@ int main(int argc, char** argv) {
                 redeNeural.treinar(entradas, alvos);
             }
         }
-    } else if (decision ==3) {
+    } else if (decision == 3) {
+        GeraMolecula gerador;
+        gerador.MoleculasCriadas();
+    } else if (decision == 4) {
         cout << "Até mais!" << endl;
     } else { cout << "Acao invalida!" << endl; }
     system("pause");
