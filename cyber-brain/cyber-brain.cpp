@@ -249,7 +249,8 @@ class RedeNeural {
 
 int main(int argc, char** argv) {
     int decision, decision_quantic;
-    cout << "[1] Sistema Quantico\n[2] Rede Neural\n-> ";
+    menu: 
+    cout << "[1] Sistema Quantico\n[2] Rede Neural\n[3] Sair\n-> ";
     cin >> decision;
     Estilo();
     if (decision == 1) {                                                          // iniciando sistema quantico
@@ -263,7 +264,10 @@ int main(int argc, char** argv) {
         cin >> decision_quantic;
         if (decision_quantic == 1) {
             CiraElemento();                                                       // funcao para criar novo elemento com base no atomo criado por particulas
-        }
+        } else if (decision_quantic == 2){
+            cout << "Saindo . . . " << endl;
+            goto menu;
+        } else { cout << "Informacao Invalida!" << endl; }
     }
     else if (decision == 2) {
         int opcoes;
@@ -307,7 +311,9 @@ int main(int argc, char** argv) {
                 redeNeural.treinar(entradas, alvos);
             }
         }
-    }
+    } else if (decision ==3) {
+        cout << "Até mais!" << endl;
+    } else { cout << "Acao invalida!" << endl; }
     system("pause");
     return 0;
 }
