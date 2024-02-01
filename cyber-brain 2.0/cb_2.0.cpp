@@ -1,29 +1,29 @@
-#include <iostream>
-#include <cmath>
-#include <vector>
-#include <string>
-#include <ctime>
-using namespace std;
+#include <iostream>     // biblioteca excenssial para o bom funcionamento do software                           
+#include <cmath>        // biblioteca que ajuda a realizar calculos matematicos complexos
+#include <vector>       // biblioteca que ajuda a manipular vetores e matrizes
+#include <string>       // bibliotexa que permite o uso de strings
+#include <ctime>        // biblioteca que permite a manipulacao do tempo
+using namespace std;    // espaco que permite o uso de funcoes sem mencionar o termo "std::nome_da_funcao"
 
 class Neuronio {
     private:
-        double limiar, bias;                                                    // o limiar tem o papel do peso que define o quao importante um neuronio eh
+        double limiar, bias;     // o limiar tem o papel do peso que define o quao importante um neuronio eh
     public:
-        Neuronio(double axonio, double bias) : limiar(limiar), bias(bias) {}
-        double feedforward(double axonio) { return axonio * axonio + bias; }
+        Neuronio(double axonio, double bias) : limiar(limiar), bias(bias) {} // construtor da classe
+        double feedforward(double axonio) { return axonio * axonio + bias; } // funcao d ativacao
 
         double alteralimiar(double dado) { this->limiar = limiar + dado; return this->limiar; }
 
-        void treinar(double entrada, double alvo) {
-            double saida = feedforward(entrada);
-            double erro = alvo - saida;                                         // Calcula o erro
+        void treinar(double entrada, double alvo) {     // funcao que treina o neuronio
+            double saida = feedforward(entrada);        // ativa o neuronio e armazena a saida dele
+            double erro = alvo - saida;                 // Calcula o erro
 
-            // Ajusta o peso e o bias usando o gradiente descendente
-            limiar += 0.1 * erro * entrada;                                     // os digitos em double sao as taxas de aprendizado
+                                                        // Ajusta o limiar e o bias usando o gradiente descendente
+            limiar += 0.1 * erro * entrada;             // os digitos em double sao as taxas de aprendizado
             bias += 0.1 * erro;
 
-            cout << "Peso -> " << limiar << "\nBias -> " << bias << endl;       // mostrando o peso e o bias
-            cout << "Resultado: " << entrada * limiar + bias << endl;           // mostrando a saida
+            cout << "Peso -> " << limiar << "\nBias -> " << bias << endl;   // mostrando o peso e o bias
+            cout << "Resultado: " << entrada * limiar + bias << endl;       // mostrando a saida
         }
 
 };
