@@ -55,7 +55,7 @@ class RedeNeural {
             }
         }
 };
-void LimiarDeAtivacao(double axonio, double alvo) {
+void LimiarDeAtivacao(double axonio) {
     if ((axonio > 0.0) && (axonio < 2.0)) {
         double w1, b1, w2, b2, ns, bs, x;
         int decisao;
@@ -84,13 +84,12 @@ void LimiarDeAtivacao(double axonio, double alvo) {
     else {
         cout << "Neuronio em Repouso!" << endl << "Recuperando Limiar" << endl;
         axonio -= 0.1;
-        LimiarDeAtivacao(axonio, alvo);
+        LimiarDeAtivacao(axonio);
     }
 }
 int main()
 {
     double axonio, alvo;
     cout << "Informe o valor do estimulo: "; cin >> axonio;
-    cout << "Agora o valor do alvo: ";       cin >> alvo;
-    LimiarDeAtivacao(axonio, alvo);
+    LimiarDeAtivacao(axonio);
 }
