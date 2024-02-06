@@ -8,7 +8,7 @@
 using namespace std;
 
 //-----------------------------------------------Elementos
-void Estilo() {                                                           // funcao para ajudar a entender o software
+void Estilo() {                                                                                  // funcao para ajudar a entender o software
     cout << "----------------------------------------------------------------------------------------------" << endl;
 }
 /*
@@ -166,9 +166,10 @@ void CriaAtomo(AtomoGeral* atomo) {
 //-------------------------------------------------------------------| Nivel Molecular
 class Molecula {                                 // classe molecula onde contem os atributos de uma molecula
     private:
-        int qtd_elementos = 0;                       // quantidade de elementos que a molecula contem
-        string elemento[30];
-    public:
+        int qtd_elementos = 0;                   // quantidade de elementos que a molecula contem
+        string elemento[30];                     // array para adicionar elementos na molecula     
+        bool condutor;                           // define se uma molecula é condutora ou nao
+      public:
         int DefineQtdElementos(int quantidade) { this->qtd_elementos = quantidade; return this->qtd_elementos; }
         void  DefineElementos() {
             for (int i = 0; i < qtd_elementos; i++) {
@@ -208,7 +209,7 @@ class Neuronio {
         // Função linear
         double feedforward(double entrada) { return entrada * peso + bias; }
 
-        void treinar(double entrada, double alvo) {
+        void treinar(double entrada, double alvo) { 
             double saida = feedforward(entrada);
             double erro = alvo - saida;                                       // Calcula o erro
 
@@ -253,6 +254,45 @@ class RedeNeural {
         }
 };
 
+void AtivaNeuronio() {
+    bool cont = true;
+    while (cont == true) {
+    ativa_neuro:
+        double w1, b1, w2, b2, ws, bs;
+        int decisao;
+
+        cout << "Informe o valor de entrada para Neuronio-1: "; cin >> w1;      // definindo peso do neuronio 1
+        cout << "Agora o valor alvo para Neuronio-1: ";         cin >> b1;      // definindo bias do neuronio 1
+        cout << "Agora valor de entrada do Neuronio-2: ";       cin >> w2;      // peso do neuronio 2
+        cout << "Agora o valor alvo do Neuronio-2: ";           cin >> b2;      // bias do neuornio 2
+        cout << "Valor de entrada do Neuronio de Saida: ";      cin >> ws;      // peso do neuronio de saida
+        cout << "Valor alvo do Neuronio de Saida: ";            cin >> bs;      // bias do neuronio de saida
+        Estilo();
+
+        RedeNeural redeNeural(w1, b1, w2, b2, ws, bs);                          // instanciando rede neural
+
+        // Testa a rede neural
+        cout << "A saida da rede neural para x=6 e: " << redeNeural.feedforward(6) << endl;  //6 é o valor informado para a rede, o retorno deve ser proximo de 36
+        cout << "Continuar?\n[1]Sim\n[2]Nao\n-> "; cin >> decisao;
+        if (decisao == 2) { cont = false; }                                                  // condicional que define a continuidade do codigo
+        Estilo();
+    }
+}
+void TreinaNeuronio() {
+    // Treina a rede neural
+    double w1 = 0, b1 = 0, w2 = 0, b2 = 0, ws = 0, bs = 0;
+
+    RedeNeural redeNeural(w1, b1, w2, b2, ws, bs);
+    // Dados de treinamento
+    vector<double> entradas = { 1, 2, 3, 4, 5 };
+    vector<double> alvos = { 1, 4, 9, 16, 25 };
+
+    for (int i = 0; i <= 3; i++) {                                                  // funcao for para que o treinamento seja repetido até que tenha os valores ideais
+        cout << "Alvos: " << alvos[0] << ", " << alvos[1] << ", " << alvos[2] << ", " << alvos[3] << ", " << alvos[4];
+        redeNeural.treinar(entradas, alvos);
+    }
+}
+
 int main(int argc, char** argv) {
     int decision, decision_quantic;
     menu:
@@ -284,41 +324,14 @@ int main(int argc, char** argv) {
         cin >> opcoes;
 
         if (opcoes == 1) {
-            bool cont = true;
-            while (cont == true) {
-                double w1, b1, w2, b2, ws, bs;
-                int decisao;
-
-                cout << "Informe o valor de entrada para Neuronio-1: "; cin >> w1;      // definindo peso do neuronio 1
-                cout << "Agora o valor alvo para Neuronio-1: ";         cin >> b1;      // definindo bias do neuronio 1
-                cout << "Agora valor de entrada do Neuronio-2: ";       cin >> w2;      // peso do neuronio 2
-                cout << "Agora o valor alvo do Neuronio-2: ";           cin >> b2;      // bias do neuornio 2
-                cout << "Valor de entrada do Neuronio de Saida: ";      cin >> ws;      // peso do neuronio de saida
-                cout << "Valor alvo do Neuronio de Saida: ";            cin >> bs;      // bias do neuronio de saida
-                Estilo();
-
-                RedeNeural redeNeural(w1, b1, w2, b2, ws, bs);                          // instanciando rede neural
-
-                // Testa a rede neural
-                cout << "A saida da rede neural para x=6 e: " << redeNeural.feedforward(6) << endl;  //6 é o valor informado para a rede, o retorno deve ser proximo de 36
-                cout << "Continuar?\n[1]Sim\n[2]Nao\n-> "; cin >> decisao;
-                if (decisao == 2) { cont = false; }                                                  // condicional que define a continuidade do codigo
-                Estilo();
-            }
+            cout << "-----------------------------------| ATIVANDO NEURONIO |-----------------------------" << endl;
+            AtivaNeuronio();
         }
         else if (opcoes == 2) {
-            // Treina a rede neural
-            double w1 = 0, b1 = 0, w2 = 0, b2 = 0, ws = 0, bs = 0;
-
-            RedeNeural redeNeural(w1, b1, w2, b2, ws, bs);
-            // Dados de treinamento
-            vector<double> entradas = { 1, 2, 3, 4, 5 };
-            vector<double> alvos = { 1, 4, 9, 16, 25 };
-
-            for (int i = 0; i <= 3; i++) {                                                  // funcao for para que o treinamento seja repetido até que tenha os valores ideais
-                cout << "Alvos: " << alvos[0] << ", " << alvos[1] << ", " << alvos[2] << ", " << alvos[3] << ", " << alvos[4];
-                redeNeural.treinar(entradas, alvos);
-            }
+            cout << "--------------------------------| INICIANDO TREINAMENTO |-----------------------------" << endl;
+            TreinaNeuronio();
+            cout << "-----------------------------------| ATIVANDO NEURONIO |-----------------------------" << endl;
+            AtivaNeuronio();
         }
     }
     else if (decision == 3) {
