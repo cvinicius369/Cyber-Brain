@@ -6,54 +6,54 @@
 using namespace std;    // espaco que permite o uso de funcoes sem mencionar o termo "std::nome_da_funcao"
 
 class Neuronio {
-    private:
-        double limiar, bias;     // o limiar tem o papel do peso que define o quao importante um neuronio eh
-    public:
-        Neuronio(double axonio, double bias) : limiar(limiar), bias(bias) {} // construtor da classe
-        double feedforward(double axonio) { return axonio * axonio + bias; } // funcao d ativacao
+private:
+    double limiar, bias;     // o limiar tem o papel do peso que define o quao importante um neuronio eh
+public:
+    Neuronio(double axonio, double bias) : limiar(limiar), bias(bias) {} // construtor da classe
+    double feedforward(double axonio) { return axonio * axonio + bias; } // funcao d ativacao
 
-        double alteralimiar(double dado) { this->limiar = limiar + dado; return this->limiar; }
+    double alteralimiar(double dado)  { this->limiar = limiar + dado; return this->limiar; }
 
-        void treinar(double entrada, double alvo) {     // funcao que treina o neuronio
-            double saida = feedforward(entrada);        // ativa o neuronio e armazena a saida dele
-            double erro = alvo - saida;                 // Calcula o erro
+    void treinar(double entrada, double alvo) {     // funcao que treina o neuronio
+        double saida = feedforward(entrada);        // ativa o neuronio e armazena a saida dele
+        double erro = alvo - saida;                 // Calcula o erro
 
-                                                        // Ajusta o limiar e o bias usando o gradiente descendente
-            limiar += 0.1 * erro * entrada;             // os digitos em double sao as taxas de aprendizado
-            bias += 0.1 * erro;
+        // Ajusta o limiar e o bias usando o gradiente descendente
+        limiar += 0.1 * erro * entrada;             // os digitos em double sao as taxas de aprendizado
+        bias += 0.1 * erro;
 
-            cout << "Peso -> " << limiar << "\nBias -> " << bias << endl;   // mostrando o peso e o bias
-            cout << "Resultado: " << entrada * limiar + bias << endl;       // mostrando a saida
-        }
+        cout << "Peso -> " << limiar << "\nBias -> " << bias << endl;   // mostrando o peso e o bias
+        cout << "Resultado: " << entrada * limiar + bias << endl;       // mostrando a saida
+    }
 
 };
 class RedeNeural {
     Neuronio neuronio1, neuronio2, neuronio_saida;
 
-    public:
-        RedeNeural(double w1, double b1, double w2, double b2, double ws, double bs) : neuronio1(w1, b1), neuronio2(w2, b2), neuronio_saida(ws, bs) {}
+public:
+    RedeNeural(double w1, double b1, double w2, double b2, double ws, double bs) : neuronio1(w1, b1), neuronio2(w2, b2), neuronio_saida(ws, bs) {}
 
-        double feedforward(double x) {
-            double saida_neuronio1 = neuronio1.feedforward(x);
-            double saida_neuronio2 = neuronio2.feedforward(x);
+    double feedforward(double x) {
+        double saida_neuronio1 = neuronio1.feedforward(x);
+        double saida_neuronio2 = neuronio2.feedforward(x);
 
-            double soma = saida_neuronio1 + saida_neuronio2;
-            double saida_rede = neuronio_saida.feedforward(soma);
+        double soma = saida_neuronio1 + saida_neuronio2;
+        double saida_rede = neuronio_saida.feedforward(soma);
 
-            return saida_rede;
+        return saida_rede;
+    }
+    void treinar(vector<double> entradas, vector<double> alvos) {
+        for (int i = 0; i < entradas.size(); i++) {
+            double entrada = entradas[i];
+            double alvo = alvos[i];
+
+            // Treina cada neurônio na rede
+            neuronio1.treinar(entrada, alvo);
+            neuronio2.treinar(entrada, alvo);
+
+            neuronio_saida.treinar(neuronio1.feedforward(entrada) + neuronio2.feedforward(entrada), alvo);
         }
-        void treinar(vector<double> entradas, vector<double> alvos) {
-            for (int i = 0; i < entradas.size(); i++) {
-                double entrada = entradas[i];
-                double alvo = alvos[i];
-
-                // Treina cada neurônio na rede
-                neuronio1.treinar(entrada, alvo);
-                neuronio2.treinar(entrada, alvo);
-
-                neuronio_saida.treinar(neuronio1.feedforward(entrada) + neuronio2.feedforward(entrada), alvo);
-            }
-        }
+    }
 };
 void LimiarDeAtivacao(double axonio) {
     if ((axonio > 0.0) && (axonio < 2.0)) {
