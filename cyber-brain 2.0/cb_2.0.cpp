@@ -9,7 +9,7 @@ class Neuronio {
 private:
     double limiar, bias;     // o limiar tem o papel do peso que define o quao importante um neuronio eh
 public:
-    Neuronio(double axonio1, double axonio2, double bias) : limiar(axonio), bias(bias) {} // construtor da classe
+    Neuronio(double axonio, double bias) : limiar(axonio), bias(bias) {} // construtor da classe
     double feedforward(double axonio) { return axonio * axonio + bias; } // funcao d ativacao
 
     double alteralimiar(double dado)  { this->limiar = limiar + dado; return this->limiar; }
@@ -31,7 +31,7 @@ class RedeNeural {
     Neuronio neuronio1, neuronio2, neuronio_saida;
 
 public:
-    RedeNeural(double w1, double b1, double w2, double b2, double ws, double bs) : neuronio1(w1, w11, b1), neuronio2(w2, w22, b2), neuronio_saida(ws, wss, bs) {}
+    RedeNeural(double w1, double b1, double w2, double b2, double ws, double bs) : neuronio1(w1, b1), neuronio2(w2, b2), neuronio_saida(ws, bs) {}
 
     double feedforward(double x) {
         double saida_neuronio1 = neuronio1.feedforward(x);
