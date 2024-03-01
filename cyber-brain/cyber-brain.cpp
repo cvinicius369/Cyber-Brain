@@ -75,6 +75,7 @@ void ValidarRedeNeural(double x, double y){
     n1 = 0; n2 = 0; ns = 0; 
     s1 = 0; s2 = 0; ss = 0;
 
+
     int ny = round(y); int nx = round(x);
     int z = ny % nx;
     int i =  0;
@@ -87,9 +88,9 @@ void ValidarRedeNeural(double x, double y){
 
             RedeNeural sinapse2(n1, n2, ns, s1, s2, ss);
             cout << "Resultado em teste: " << sinapse2.feedforward(x) << endl;
-            y = sinapse2.feedforward(x);
-            int ny2 = round(y);
+            double y2 = sinapse2.feedforward(x);
 
+            int ny2 = round(y2);
             z = ny2 % nx;
 
             n1 = n1 + 0.0001; n2 = n2 + 0.0001; ns = ns + 0.0001; 
