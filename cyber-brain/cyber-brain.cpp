@@ -3,7 +3,20 @@
 #include <vector>       // biblioteca que ajuda a manipular vetores e matrizes
 #include <string>       // bibliotexa que permite o uso de strings
 #include <ctime>        // biblioteca que permite a manipulacao do tempo
+#include <iomanip>      //
 using namespace std;    // espaco que permite o uso de funcoes sem mencionar o termo "std::nome_da_funcao"
+
+class Styles{
+    public:
+        void LineStyle(){
+            cout << "---------------------------------------------------------------------------" << endl;
+        }
+        void BannerNeural(){
+            cout << "---------------------------------------------------------------------------" << endl;
+            cout << "///////////////////////////// SISTEMA NEURAL /////////////////////////////" << endl;
+            cout << "---------------------------------------------------------------------------" << endl;
+        }
+};
 
 class Neuronio {
 private:
@@ -55,7 +68,40 @@ public:
         }
     }
 };
+
+void ValidarRedeNeural(double x, double y){
+    double n1, n2, ns, s1, s2, ss;
+    RedeNeural sinapse2(n1, n2, ns, s1, s2, ss);
+    n1 = 0.001; n2 = 0.001; ns = 0.001; 
+    s1 = 0.001; s2 = 0.001; ss = 0.001;
+
+    int ny = round(y); int nx = round(x);
+    int z = ny / nx;
+    int i =  0;
+
+    if ( (z == 0) || (z == x) ){
+        cout << "Saída funcionando corretamente!" << endl;
+    } else {
+        while ( (z == 0) || (z == x) )
+        {
+
+            RedeNeural sinapse2(n1, n2, ns, s1, s2, ss);
+            cout << "Resultado em teste: " << sinapse2.feedforward(x) << endl;
+            y = sinapse2.feedforward(x);
+            int ny2 = round(y);
+
+            z = ny2 / nx;
+
+            n1 = n1 + 0.001; n2 = n2 + 0.001; ns = ns + 0.001; 
+            s1 = s1 + 0.001; s2 = s2 + 0.001; ss = ss + 0.001;
+
+        }
+        cout << "Resultado corrigido: " << sinapse2.feedforward(x) << endl;
+    }
+}
+
 void LimiarDeAtivacao(double axonio) {
+    Styles s;
     if ((axonio > 0.0) && (axonio < 2.0)) {
         double w1, b1, w2, b2, ns, bs, x;
         int decisao;
@@ -73,13 +119,16 @@ void LimiarDeAtivacao(double axonio) {
         vector<double> entradas = { 1, 2, 3, 4, 5 };
         vector<double> alvos = { 1, 4, 9, 16, 25 };
 
-        for (int i = 0; i <= 3; i++) {                                                        // funcao for para que o treinamento seja repetido até que tenha os valores ideais
+        for (int i = 0; i <= 3; i++) {  // funcao for para que o treinamento seja repetido até que tenha os valores ideais
             cout << "Alvos: " << alvos[0] << ", " << alvos[1] << ", " << alvos[2] << ", " << alvos[3] << ", " << alvos[4];
             sinapse1.treinar(entradas, alvos);
         }
-
+        s.LineStyle();
         sinapse1.feedforward(x);
-        cout << "A saida da rede neural para x=" << x << " e: " << sinapse1.feedforward(x) << endl;     //6 é o valor informado para a rede, o retorno deve ser proximo de 36
+        cout << "A saida da rede neural para x=" << x << " e: " << sinapse1.feedforward(x) << endl;
+        s.LineStyle();
+        ValidarRedeNeural(x, sinapse1.feedforward(x));
+        s.LineStyle();
     }
     else {
         cout << "Neuronio em Repouso!" << endl << "Recuperando Limiar" << endl;
@@ -87,18 +136,6 @@ void LimiarDeAtivacao(double axonio) {
         LimiarDeAtivacao(axonio);
     }
 }
-
-class Styles{
-    public:
-        void LineStyle(){
-            cout << "---------------------------------------------------------------------------" << endl;
-        }
-        void BannerNeural(){
-            cout << "---------------------------------------------------------------------------" << endl;
-            cout << "///////////////////////////// SISTEMA NEURAL /////////////////////////////" << endl;
-            cout << "---------------------------------------------------------------------------" << endl;
-        }
-};
 
 int main(int argc, char** argv) {
     Styles s;
