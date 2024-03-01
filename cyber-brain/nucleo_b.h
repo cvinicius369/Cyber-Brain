@@ -50,11 +50,7 @@ void ClassificaConversa(){
     cout << "O texto é " << category << "." << endl; // Exibe a categoria do texto.
 }
 
-void Poema(){
-    nucleo_a::Styles s;
-
-    cout << "Certo, o que acha desse poema que acabei de criar? " << endl;
-    s.LineStyle();
+void CriaPoemaAleatorio(){
     srand((unsigned) time(0));
 
     vector<string> adjetivos = {"brilhante", "rápido", "lindo", "tranquilo", "majestoso", "estranho", "assustador", 
@@ -73,6 +69,35 @@ void Poema(){
         || (subs == substantivos[9])){
             cout << "A " << adjetivos[adjIndex] << " " << subs << " " << verbos[verbIndex] << endl;
         } else { cout << "O " << adjetivos[adjIndex] << " " << subs << " " << verbos[verbIndex] << endl; }
+    }
+}
+
+void Poema(){
+    nucleo_a::Styles s;
+    cout << "Entendi, quer que o poema tenha algumas palavras especificas?" << endl;
+    int dec; cin >> dec;
+
+    if (dec == 1){
+        cout << "Certo, o que acha desse poema que acabei de criar? " << endl;
+        s.LineStyle();
+        CriaPoemaAleatorio();
+    } else {
+        bool cont = false; int resp; int i; int linhas; int linha = 0;
+        vector<string> adjetivos = {};
+        vector<string> substantivos = {};
+        vector<string> verbos = {};
+
+        cout << "Quantas linhas: "; cin >> linhas;
+        cout << "Me diga quais as palavras." << endl;
+        while (cont == false)
+        {
+            cout << "Um adjetivo: ";    cin >> adjetivos[i];
+            cout << "Um Substantivo: "; cin >> substantivos[i];
+            cout << "Um verbo: ";       cin >> verbos[i];
+            
+            cout << "Continuar: "; cin >> cont;
+        }
+        
     }
 }
 
