@@ -72,17 +72,17 @@ public:
 void ValidarRedeNeural(double x, double y){
     double n1, n2, ns, s1, s2, ss;
     RedeNeural sinapse2(n1, n2, ns, s1, s2, ss);
-    n1 = 0.001; n2 = 0.001; ns = 0.001; 
-    s1 = 0.001; s2 = 0.001; ss = 0.001;
+    n1 = 0; n2 = 0; ns = 0; 
+    s1 = 0; s2 = 0; ss = 0;
 
     int ny = round(y); int nx = round(x);
-    int z = ny / nx;
+    int z = ny % nx;
     int i =  0;
 
-    if ( (z == 0) || (z == x) ){
+    if ( (z == 0) ){
         cout << "Saída funcionando corretamente!" << endl;
     } else {
-        while ( (z == 0) || (z == x) )
+        while ( (z != 0) )
         {
 
             RedeNeural sinapse2(n1, n2, ns, s1, s2, ss);
@@ -90,10 +90,10 @@ void ValidarRedeNeural(double x, double y){
             y = sinapse2.feedforward(x);
             int ny2 = round(y);
 
-            z = ny2 / nx;
+            z = ny2 % nx;
 
-            n1 = n1 + 0.001; n2 = n2 + 0.001; ns = ns + 0.001; 
-            s1 = s1 + 0.001; s2 = s2 + 0.001; ss = ss + 0.001;
+            n1 = n1 + 0.0001; n2 = n2 + 0.0001; ns = ns + 0.0001; 
+            s1 = s1 + 0.0001; s2 = s2 + 0.0001; ss = ss + 0.0001;
 
         }
         cout << "Resultado corrigido: " << sinapse2.feedforward(x) << endl;
