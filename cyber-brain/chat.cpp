@@ -4,9 +4,13 @@
 #include <string>       // bibliotexa que permite o uso de strings
 #include <ctime>        // biblioteca que permite a manipulacao do tempo
 #include "nucleo_a.h"
+#include "nucleo_b.h"
 using namespace std;    // espaco que permite o uso de funcoes sem mencionar o termo "std::nome_da_funcao"
 
 int main(){
-    menu();
+    nucleo_a::Styles s;
+
+    s.BannerEVA();
+    Ativa();
     return 0;   
 }

@@ -1,5 +1,5 @@
-#ifndef conection_h
-#define conection_h
+#ifndef nucleo_a
+#define nucleo_a
 #include <iostream>     // biblioteca excenssial para o bom funcionamento do software                           
 #include <cmath>        // biblioteca que ajuda a realizar calculos matematicos complexos
 #include <vector>       // biblioteca que ajuda a manipular vetores e matrizes
@@ -16,7 +16,12 @@ class Styles{
         }
         void BannerNeural(){
             cout << "---------------------------------------------------------------------------" << endl;
-            cout << "///////////////////////////// SISTEMA NEURAL /////////////////////////////" << endl;
+            cout << "///////////////////////////// SISTEMA NEURAL //////////////////////////////" << endl;
+            cout << "---------------------------------------------------------------------------" << endl;
+        }
+        void BannerEVA(){
+            cout << "---------------------------------------------------------------------------" << endl;
+            cout << "////////////////////////////////// EVA ////////////////////////////////////" << endl;
             cout << "---------------------------------------------------------------------------" << endl;
         }
 };
@@ -83,41 +88,32 @@ void ValidarRedeNeural(double x, double y){
     int z = ny % nx;
     int i =  0;
 
-    if ( (z == 0) ){
-        cout << "Saída funcionando corretamente!" << endl;
-    } else {
-        while ( (z != 0) )
-        {
+    while ( (z != 0) )
+    {
+        RedeNeural sinapse2(n1, n2, ns, s1, s2, ss);
+        cout << "Resultado em teste: " << sinapse2.feedforward(x) << endl;
+        double y2 = sinapse2.feedforward(x);
 
-            RedeNeural sinapse2(n1, n2, ns, s1, s2, ss);
-            cout << "Resultado em teste: " << sinapse2.feedforward(x) << endl;
-            double y2 = sinapse2.feedforward(x);
+        int ny2 = round(y2);
+        z = ny2 % nx;
 
-            int ny2 = round(y2);
-            z = ny2 % nx;
+        n1 = n1 + 0.0001; n2 = n2 + 0.0001; ns = ns + 0.0001; 
+        s1 = s1 + 0.0001; s2 = s2 + 0.0001; ss = ss + 0.0001;
 
-            n1 = n1 + 0.0001; n2 = n2 + 0.0001; ns = ns + 0.0001; 
-            s1 = s1 + 0.0001; s2 = s2 + 0.0001; ss = ss + 0.0001;
-
-        }
-        cout << "Resultado corrigido: " << sinapse2.feedforward(x) << endl;
     }
+    cout << "Resultado corrigido: " << sinapse2.feedforward(x) << endl;
 }
 
 void LimiarDeAtivacao(double axonio) {
     Styles s;
     if ((axonio > 0.0) && (axonio < 2.0)) {
         double w1, b1, w2, b2, ns, bs, x;
+        w1 = 0; b1 = 0;
+        w2 = 0; b2 = 0;
+        ns = 0; bs = 0;
         int decisao;
 
-        cout << "Informe o valor de entrada para Neuronio-1: "; cin >> w1;      // definindo peso do neuronio 1
-        cout << "Agora o valor alvo para Neuronio-1: ";         cin >> b1;      // definindo bias do neuronio 1
-        cout << "Agora valor de entrada do Neuronio-2: ";       cin >> w2;      // peso do neuronio 2
-        cout << "Agora o valor alvo do Neuronio-2: ";           cin >> b2;      // bias do neuornio 2
-        cout << "Valor de entrada do Neuronio de Saida: ";      cin >> ns;      // peso do neuronio de saida
-        cout << "Valor alvo do Neuronio de Saida: ";            cin >> bs;      // bias do neuronio de saida
-        cout << "Agora informe qual o valor de x: ";            cin >> x;       // valor de x
-
+        cout << "Informe qual o valor de x: ";            cin >> x;       // valor de x
         RedeNeural sinapse1(w1, b1, w2, b2, ns, bs);
 
         vector<double> entradas = { 1, 2, 3, 4, 5 };
@@ -134,29 +130,22 @@ void LimiarDeAtivacao(double axonio) {
         ValidarRedeNeural(x, sinapse1.feedforward(x));
         s.LineStyle();
     }
-    else {
+    else if (axonio > 2){
         cout << "Neuronio em Repouso!" << endl << "Recuperando Limiar" << endl;
         axonio -= 0.1;
         LimiarDeAtivacao(axonio);
-    }
+    } 
+    else if (axonio < 0.0){
+        cout << "Estimulo baixo!" << endl << "Recuperando Limiar" << endl;
+        axonio += 0.1;
+        LimiarDeAtivacao(axonio);
+    } else { cout << "Estimulo invalido!" << endl; }
 }
 
 int menu() {
     Styles s;
-    int action;
-
-    cout << "[1] - Sistema Neural \n->"; cin >> action;
-    s.BannerNeural();
-    if (action == 1) {
-        double axonio;
-
-        cout << "Informe o valor do estimulo: "; cin >> axonio;
-        LimiarDeAtivacao(axonio);
-    }
-
-    system("pause");
-    return 0;
-}
-
-
+    s.BannerNeural(); double axonio;
+    cout << "Informe o valor do estimulo: "; cin >> axonio;
+    LimiarDeAtivacao(axonio); system("pause"); return 0;
+} 
 #endif
