@@ -3,11 +3,72 @@
 #include <iostream>     // biblioteca excenssial para o bom funcionamento do software                           
 #include <string>       // bibliotexa que permite o uso de strings
 #include <ctime>        // biblioteca que permite a manipulacao do tempo
+#include <vector>
+#include <cstdlib>
 using namespace std;    // espaco que permite o uso de funcoes sem mencionar o termo "std::nome_da_funcao"
 
 struct dados{
     string nome = "EVA";
 };
+
+// Função para calcular a pontuação de polaridade de um texto.
+double get_polarity_score(const string& text) {
+    // Cria um vetor de palavras.
+    vector<string> words;
+
+    for (char c : text) { if (isalpha(c)) { words.push_back(string(1, c)); } } // Separa o texto em palavras.
+
+    // Calcula a pontuação de polaridade de cada palavra.
+    vector<double> scores;
+    for (string word : words) {
+        // Se a palavra é positiva, a pontuação é 1.
+        if (word == "good" || word == "great" || word == "awesome") { scores.push_back(1.0); }
+        // Se a palavra é negativa, a pontuação é -1.
+        else if (word == "bad" || word == "terrible" || word == "awful") { scores.push_back(-1.0); }
+        else { scores.push_back(0.0); } // Se a palavra não é positiva nem negativa, a pontuação é 0.
+    }
+
+    // Calcula a média das pontuações.
+    double score = 0.0;
+    for (double s : scores) { score += s; }
+    score /= scores.size(); return score;   // Retorna a pontuação de polaridade.
+}
+
+// Função para classificar um texto em duas categorias: positivo ou negativo.
+string classify_text(const string& text) {
+    double score = get_polarity_score(text);  // Calcula a pontuação de polaridade do texto.
+
+    if (score >= 0.0) { return "positive"; }// Se a pontuação de polaridade é maior ou igual a 0,0, o texto é positivo.
+    else { return "negative"; }             // Se a pontuação de polaridade é menor que 0,0, o texto é negativo.
+}
+
+void ClassificaConversa(){
+    cout << "Fique a vontade para digitar! ^^" << endl;
+    cout << "Digite um texto: ";                     // Solicita ao usuário para digitar um texto.
+    string text; cin >> text;
+    string category = classify_text(text);           // Classifica o texto em duas categorias: positivo ou negativo.
+    cout << "O texto é " << category << "." << endl; // Exibe a categoria do texto.
+}
+
+void Poema(){
+    srand((unsigned) time(0));
+
+    vector<string> adjetivos = {"brilhante", "rápido", "lindo", "tranquilo", "majestoso", "feio"};
+    vector<string> substantivos = {"sol", "rio", "vento", "mar", "céu", "fogo", "sombra", "lua"};
+    vector<string> verbos = {"brilha", "corre", "sopra", "ondula", "se estende"};
+
+    for(int i = 0; i < 3; i++) {
+        int adjIndex = rand() % adjetivos.size();
+        int subIndex = rand() % substantivos.size();
+        int verbIndex = rand() % verbos.size();
+
+        std::cout << "O " << adjetivos[adjIndex] << " " << substantivos[subIndex] << " " << verbos[verbIndex] << ".\n";
+    }
+}
+
+void Conversa(){
+
+}
 
 void Ativa(){
     dados d;
@@ -20,6 +81,7 @@ void Ativa(){
     s.LineStyle();
 
     if (action == 1){ nucleo_a::menu(); }
+    else if (action == 4){ Conversa(); }
     else if (action == 5){ cout << "Até breve! Espero ter ajudado! ^^" << endl; }
     else { cout << "Desculpe! Eu não entendi.." << endl; goto inicio; }
     s.LineStyle();
