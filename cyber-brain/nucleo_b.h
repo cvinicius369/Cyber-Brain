@@ -51,23 +51,29 @@ void ClassificaConversa(){
 }
 
 void Poema(){
+    nucleo_a::Styles s;
+
+    cout << "Certo, o que acha desse poema que acabei de criar? " << endl;
+    s.LineStyle();
     srand((unsigned) time(0));
 
-    vector<string> adjetivos = {"brilhante", "rápido", "lindo", "tranquilo", "majestoso", "feio"};
-    vector<string> substantivos = {"sol", "rio", "vento", "mar", "céu", "fogo", "sombra", "lua"};
-    vector<string> verbos = {"brilha", "corre", "sopra", "ondula", "se estende"};
+    vector<string> adjetivos = {"brilhante", "rápido", "lindo", "tranquilo", "majestoso", "estranho", "assustador", 
+                                "desbravador", "intimidador", "tentador"};
+    vector<string> substantivos = {"sol","rio", "vento", "mar", "céu", "fogo", "sombra","lua", "terra", "chuva"};
+    vector<string> verbos = {"brilha", "corre", "sopra", "ondula", "se estende", "dorme", "morre",  "vive", "voa",
+                                "dorme"};
 
     for(int i = 0; i < 3; i++) {
         int adjIndex = rand() % adjetivos.size();
         int subIndex = rand() % substantivos.size();
         int verbIndex = rand() % verbos.size();
+        string subs = substantivos[subIndex];
 
-        std::cout << "O " << adjetivos[adjIndex] << " " << substantivos[subIndex] << " " << verbos[verbIndex] << ".\n";
+        if ((subs == substantivos[6]) || (subs == substantivos[7]) || (subs == substantivos[8])
+        || (subs == substantivos[9])){
+            cout << "A " << adjetivos[adjIndex] << " " << subs << " " << verbos[verbIndex] << endl;
+        } else { cout << "O " << adjetivos[adjIndex] << " " << subs << " " << verbos[verbIndex] << endl; }
     }
-}
-
-void Conversa(){
-
 }
 
 void Ativa(){
@@ -76,12 +82,12 @@ void Ativa(){
     inicio: 
     cout << "Bem vindo(a)!\nMe chamo " << d.nome << " Prazer em te conhecer, o que deseja fazer agora?" << endl;
     cout << "[1] - Acessar Sistema Neural\n"    << "[2] - Acessar Sistema Quantico\n"
-         << "[3] - Acessar sistema Molecular\n" << "[4] - Conversar\n" << "[5] - Sair\n->";
+         << "[3] - Poema\n" << "[4] - Acessar sistema Molecular\n" << "[5] - Sair\n-> ";
     int action; cin >> action;
     s.LineStyle();
 
     if (action == 1){ nucleo_a::menu(); }
-    else if (action == 4){ Conversa(); }
+    else if (action == 3){ Poema(); }
     else if (action == 5){ cout << "Até breve! Espero ter ajudado! ^^" << endl; }
     else { cout << "Desculpe! Eu não entendi.." << endl; goto inicio; }
     s.LineStyle();
